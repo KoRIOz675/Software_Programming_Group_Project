@@ -15,7 +15,7 @@
 - Pixelated art style
 - Point & click
 - Turn based combat
-- Backgrount / combat music
+- Background / combat music
 
 ## Gameplay
 
