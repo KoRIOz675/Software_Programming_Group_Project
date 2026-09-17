@@ -1,6 +1,6 @@
 # Software_Programming_Group_Project
 
-> Basic RPG with Fantasy and Sci-fi inspirations
+> Basic RPG
 
 ## Teck stack
 
