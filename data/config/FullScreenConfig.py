@@ -1,4 +1,4 @@
-from data.config import *
+from data.config.Config import *
 
 def get_scaled_rect(window_size, render_size):
     window_w, window_h = window_size
@@ -9,11 +9,3 @@ def get_scaled_rect(window_size, render_size):
     x = (window_w - scaled_w) // 2
     y = (window_h - scaled_h) // 2
     return Rect(x, y, scaled_w, scaled_h)
-
-def toggle_fullscreen():
-    global screen, is_fullscreen
-    is_fullscreen = not is_fullscreen
-    if is_fullscreen:
-        screen = display.set_mode((0, 0), FULLSCREEN)
-    else:
-        screen = display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), RESIZABLE)

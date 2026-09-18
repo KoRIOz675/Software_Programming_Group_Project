@@ -1,26 +1,29 @@
 from pygame import *
-from data.config import *
-from data.full_screen_config import *
+from data.config.Config import *
+from data.config.FullScreenConfig import *
+from data.config.CursorConfig import *
+from data.WindowRenderer import *
 
 init()
+set_custom_cursor()
 
 while RUNNING:
+    dt = clock.get_time() / 1000
+    dest_rect = get_window_dest_rect()
+
     for e in event.get():
         if e.type == QUIT:
             RUNNING = False
-        elif e.type == KEYDOWN and e.key == K_F11:
-            toggle_fullscreen()
+        else:
+            handle_click_event(e, dest_rect)
 
-    render_screen.fill(PURPLE)
-    
-    window_w, window_h = screen.get_size()
-    if window_w > 0 and window_h > 0:
-        dest_rect = get_scaled_rect((window_w, window_h), (SCREEN_WIDTH, SCREEN_HEIGHT))
-        screen.fill(BLACK)
-        scaled = transform.smoothscale(render_screen, dest_rect.size)
-        screen.blit(scaled, dest_rect)
+    update_click_effects(dt)
 
-    
+    draw_scene()
+    draw_click_effects(render_screen)
+
+    present(dest_rect)
+
     display.flip()
     
     clock.tick(FPS)
