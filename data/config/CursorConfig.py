@@ -6,11 +6,17 @@ CLICK_EFFECT_END_RADIUS = 2
 CLICK_EFFECT_WIDTH = 2
 CLICK_EFFECT_COLOR = WHITE
 CURSOR_HOTSPOT = (0, 0)
-CURSOR_IMAGE = image.load("assets/images/cursor/standby.png")
+CURSOR_IMAGE_STANDBY = image.load("assets/images/cursor/standby.png")
+CURSOR_IMAGE = CURSOR_IMAGE_STANDBY
 
 click_effects = []
 
 def set_custom_cursor():
+    mouse.set_cursor(CURSOR_HOTSPOT, CURSOR_IMAGE)
+
+def set_cursor_image(new_image):
+    global CURSOR_IMAGE
+    CURSOR_IMAGE = new_image
     mouse.set_cursor(CURSOR_HOTSPOT, CURSOR_IMAGE)
 
 def spawn_click_effect(pos):
@@ -37,4 +43,7 @@ def draw_click_effects(surface):
         radius = CLICK_EFFECT_START_RADIUS + (CLICK_EFFECT_END_RADIUS - CLICK_EFFECT_START_RADIUS) * t
         pos = (int(effect["pos"][0]), int(effect["pos"][1]))
         draw.circle(surface, CLICK_EFFECT_COLOR, pos, max(1, round(radius)), CLICK_EFFECT_WIDTH)
-        
+
+def set_click_effect_color(color):
+    global CLICK_EFFECT_COLOR
+    CLICK_EFFECT_COLOR = color
