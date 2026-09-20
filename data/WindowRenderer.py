@@ -1,10 +1,16 @@
 from data.config.Config import *
 from data.config.FullScreenConfig import *
 
-BACKGROUND_IMAGE = image.load("assets/images/backgrounds/0.png") # TEMP: To be replaced
+CHARACTER_SOURCE_SIZE = 32
+CHARACTER_RENDER_SIZE = 128
+RENDER_SCALE = CHARACTER_RENDER_SIZE // CHARACTER_SOURCE_SIZE
 
-def draw_scene():
-    render_screen.blit(BACKGROUND_IMAGE, (0, 0))
+def scale_image(surface):
+    width, height = surface.get_size()
+    return transform.scale(surface, (width * RENDER_SCALE, height * RENDER_SCALE))
+
+def render(surface, position):
+    render_screen.blit(surface, position)
 
 def get_window_dest_rect():
     window_w, window_h = screen.get_size()
@@ -16,5 +22,5 @@ def present(dest_rect):
     if dest_rect is None:
         return
     screen.fill(BLACK)
-    scaled = transform.smoothscale(render_screen, dest_rect.size)
+    scaled = transform.scale(render_screen, dest_rect.size)
     screen.blit(scaled, dest_rect)

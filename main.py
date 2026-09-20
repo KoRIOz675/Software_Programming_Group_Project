@@ -15,7 +15,8 @@ while RUNNING:
 
     update_click_effects(dt)
 
-    draw_scene()
+    # scene.draw()
+    # hero.draw()
     draw_click_effects(render_screen)
 
     present(dest_rect)
