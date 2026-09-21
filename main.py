@@ -1,4 +1,4 @@
-from Imports import *
+from imports import *
 
 init()
 set_custom_cursor()

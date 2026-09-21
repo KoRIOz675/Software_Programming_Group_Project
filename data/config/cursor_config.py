@@ -1,4 +1,4 @@
-from data.config.Config import *
+from data.config.config import *
 
 CLICK_EFFECT_DURATION = 0.35
 CLICK_EFFECT_START_RADIUS = 18

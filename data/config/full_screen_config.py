@@ -1,4 +1,4 @@
-from data.config.Config import *
+from data.config.config import *
 
 def get_scaled_rect(window_size, render_size):
     window_w, window_h = window_size

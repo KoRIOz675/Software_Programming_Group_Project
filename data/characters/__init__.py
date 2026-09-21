@@ -1,6 +1,6 @@
 from pygame import image
 
-from data.WindowRenderer import scale_image, render
+from data.window_renderer import scale_image, render
 
 class Character:
     IMAGE_PATH = None

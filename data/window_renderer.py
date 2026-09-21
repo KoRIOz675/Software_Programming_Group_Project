@@ -1,5 +1,5 @@
-from data.config.Config import *
-from data.config.FullScreenConfig import *
+from data.config.config import *
+from data.config.full_screen_config import *
 
 CHARACTER_SOURCE_SIZE = 32
 CHARACTER_RENDER_SIZE = 128
