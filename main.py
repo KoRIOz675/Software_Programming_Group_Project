@@ -15,6 +15,7 @@ while RUNNING:
 
     update_click_effects(dt)
 
+    render_screen.fill(BLACK)
     # scene.draw()
     # hero.draw()
     draw_click_effects(render_screen)
