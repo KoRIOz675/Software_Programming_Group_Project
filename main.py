@@ -3,6 +3,8 @@ from imports import *
 init()
 set_custom_cursor()
 
+scene = Map01()
+
 while RUNNING:
     dt = clock.get_time() / 1000
     dest_rect = get_window_dest_rect()
@@ -16,7 +18,7 @@ while RUNNING:
     update_click_effects(dt)
 
     render_screen.fill(BLACK)
-    # scene.draw()
+    scene.draw()
     # hero.draw()
     draw_click_effects(render_screen)
 
