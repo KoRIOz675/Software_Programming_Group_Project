@@ -31,3 +31,17 @@ class Character:
         self.intelligence = intelligence
         self.wisdom = wisdom
         self.charisma = charisma
+    
+    def set_image(self, image_path):
+        self.IMAGE_PATH = image_path
+        self.image = scale_image(image.load(self.IMAGE_PATH))
+        
+    def get_stats(self):
+        return {
+            "strength": self.strength,
+            "dexterity": self.dexterity,
+            "constitution": self.constitution,
+            "intelligence": self.intelligence,
+            "wisdom": self.wisdom,
+            "charisma": self.charisma
+        }
