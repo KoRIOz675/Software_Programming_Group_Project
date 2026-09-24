@@ -1,0 +1,73 @@
+from pygame import mixer
+from random import uniform
+from enum import Enum
+
+class AudioType(Enum):
+    BGM = "bgm"
+    SFX = "sfx"
+
+class Audio:
+    AUDIO_FILE = None
+    AUDIO_VOLUME = 1.0
+    AUDIO_TYPE = AudioType.BGM
+
+    def __init__(self):
+        if not mixer.get_init():
+            mixer.init()
+        self.sound = None
+        self.channel = None
+        if self.AUDIO_FILE is not None:
+            self.set_music(self.AUDIO_FILE)
+        self.set_volume(self.AUDIO_VOLUME)
+
+    def play(self, loops=None):
+        if self.AUDIO_FILE is None:
+            raise RuntimeError("No audio file set. Call set_music() first.")
+        if self.AUDIO_TYPE == AudioType.BGM:
+            mixer.music.load(self.AUDIO_FILE)
+            mixer.music.set_volume(self.AUDIO_VOLUME)
+            mixer.music.play(-1 if loops is None else loops)
+        else:
+            self.channel = self.sound.play(0 if loops is None else loops)
+
+    def stop(self):
+        if self.AUDIO_TYPE == AudioType.BGM:
+            mixer.music.fadeout(500)
+        elif self.sound is not None:
+            self.sound.fadeout(500)
+
+    def pause(self):
+        if self.AUDIO_TYPE == AudioType.BGM:
+            mixer.music.pause()
+        elif self.channel is not None:
+            self.channel.pause()
+
+    def unpause(self):
+        if self.AUDIO_TYPE == AudioType.BGM:
+            mixer.music.unpause()
+        elif self.channel is not None:
+            self.channel.unpause()
+
+    def set_music(self, music_file: str):
+        self.AUDIO_FILE = music_file
+        if self.AUDIO_TYPE == AudioType.SFX:
+            self.sound = mixer.Sound(self.AUDIO_FILE)
+            self.sound.set_volume(self.AUDIO_VOLUME)
+
+    def set_volume(self, volume: float):
+        self.AUDIO_VOLUME = max(0.0, min(1.0, volume))
+        if self.AUDIO_TYPE == AudioType.BGM:
+            mixer.music.set_volume(self.AUDIO_VOLUME)
+        elif self.sound is not None:
+            self.sound.set_volume(self.AUDIO_VOLUME)
+
+    def set_audio_type(self, audio_type):
+        try:
+            self.AUDIO_TYPE = AudioType(audio_type)
+        except ValueError:
+            valid = [t.value for t in AudioType]
+            raise ValueError(f"Invalid audio type: {audio_type}. Must be one of {valid}.")
+        self.sound = None
+        self.channel = None
+        if self.AUDIO_FILE is not None:
+            self.set_music(self.AUDIO_FILE)
