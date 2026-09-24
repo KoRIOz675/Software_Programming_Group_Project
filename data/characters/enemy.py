@@ -1,6 +1,7 @@
-import pygame
-from __init__ import Character
 from random import randint
+
+from data.characters.__init__ import Character
+
 
 class Enemy(Character):
     max_damage = 0

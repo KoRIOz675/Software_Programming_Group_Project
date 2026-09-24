@@ -4,6 +4,7 @@ from data.window_renderer import scale_image, render
 
 class Character:
     IMAGE_PATH = None
+    position = (0, 0)
     strength = 0
     dexterity = 0
     constitution = 0
