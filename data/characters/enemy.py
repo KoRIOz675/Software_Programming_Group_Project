@@ -4,11 +4,12 @@ from data.characters.__init__ import Character
 
 
 class Enemy(Character):
-    max_damage = 0
     modifier = None
+    max_damage = 0
 
     def __init__(self, position: tuple):
         super().__init__(position)
+        self.enemy_or_player = "enemy"
 
 
     def attack(self, target: Character):

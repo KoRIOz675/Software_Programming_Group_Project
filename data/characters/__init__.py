@@ -1,20 +1,12 @@
 from pygame import image
 from random import randint
+import datetime
 from data.window_renderer import scale_image, render
 
 class Character:
     IMAGE_PATH = None
-    position = (0, 0)
-    strength = 0
-    dexterity = 0
-    constitution = 0
-    intelligence = 0
-    wisdom = 0
-    charisma = 0
-    health = 0
-    max_health = 0
-    armor_class = 0
-    level = 0
+    name = "place_holder"
+    enemy_or_player = "place_holder"
 
     def __init__(self, position: tuple):
         self.image = scale_image(image.load(self.IMAGE_PATH))
@@ -25,7 +17,25 @@ class Character:
         self.intelligence = 10
         self.wisdom = 10
         self.charisma = 10
+        self.armor_class = 10
         self.level = 1
+        self.animation_idle = []
+        self.animation_attack = []
+        self.animation_death = []
+        self.frame_index = 0
+        self.not_dead = 1  # if villains is alive or not
+        self.update_time = datetime.datetime.now().microsecond.real
+        self.rect = None
+        self.init_animations()
+
+    def init_animations(self):
+        for i in range(4):
+            img = image.load(f"./images/character/{self.enemy_or_player}/{self.name}/Idle/{i}.png").convert_alpha()
+            self.animation_idle.append(img)
+        self.image = self.animation_idle[self.frame_index]
+        self.rect = self.image.get_rect()
+        self.rect.topleft = self.position
+
 
     def draw(self):
         render(self.image, self.position)
