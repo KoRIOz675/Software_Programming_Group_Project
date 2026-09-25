@@ -1,4 +1,5 @@
 from data.config.config import *
+from data.window_renderer import to_render_pos
 
 CLICK_EFFECT_DURATION = 0.35
 CLICK_EFFECT_START_RADIUS = 18
@@ -25,10 +26,9 @@ def spawn_click_effect(pos):
 def handle_click_event(e, dest_rect):
     if e.type != MOUSEBUTTONDOWN or e.button != 1:
         return
-    if not dest_rect or dest_rect.width <= 0:
+    render_pos = to_render_pos(e.pos, dest_rect)
+    if render_pos is None:
         return
-    scale = dest_rect.width / SCREEN_WIDTH
-    render_pos = ((e.pos[0] - dest_rect.x) / scale, (e.pos[1] - dest_rect.y) / scale)
     spawn_click_effect(render_pos)
 
 def update_click_effects(dt):

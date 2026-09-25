@@ -24,3 +24,9 @@ def present(dest_rect):
     screen.fill(BLACK)
     scaled = transform.scale(render_screen, dest_rect.size)
     screen.blit(scaled, dest_rect)
+
+def to_render_pos(pos, dest_rect):
+    if not dest_rect or dest_rect.width <= 0:
+        return None
+    scale = dest_rect.width / SCREEN_WIDTH
+    return ((pos[0] - dest_rect.x) / scale, (pos[1] - dest_rect.y) / scale)
