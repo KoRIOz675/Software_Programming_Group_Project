@@ -3,7 +3,8 @@ from imports import *
 init()
 set_custom_cursor()
 
-scene = Map01()
+scene = Scene("assets/images/scenes/map-01.png", "assets/audio/0.ogg", 0.1)
+scene.play_music()
 
 while RUNNING:
     dt = clock.get_time() / 1000
