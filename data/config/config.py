@@ -21,4 +21,5 @@ RUNNING = True
 # Pygame setup
 clock = time.Clock()
 screen = display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), RESIZABLE)
+display.set_caption("Baldur's Gate 0.1 Pre-Alpha: The Trying of Making a Game")
 render_screen = Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
