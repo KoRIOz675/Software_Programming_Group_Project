@@ -1,14 +1,13 @@
 from pygame import image
-from random import randint
 import datetime
 from data.window_renderer import scale_image, render
 
 class Character:
-    IMAGE_PATH = None
-    name = "place_holder"
-    enemy_or_player = "place_holder"
 
-    def __init__(self, position: tuple):
+    def __init__(self, position: tuple, IMAGE_PATH: str, name: str, enemy_or_player: str):
+        self.IMAGE_PATH = IMAGE_PATH
+        self.name = name
+        self.enemy_or_player = enemy_or_player
         self.image = scale_image(image.load(self.IMAGE_PATH))
         self.position = position
         self.strength = 10
@@ -23,14 +22,17 @@ class Character:
         self.animation_attack = []
         self.animation_death = []
         self.frame_index = 0
+        self.max_health = 10
+        self.health = 10
         self.not_dead = 1  # if villains is alive or not
         self.update_time = datetime.datetime.now().microsecond.real
         self.rect = None
         self.init_animations()
 
     def init_animations(self):
-        for i in range(4):
-            img = image.load(f"./images/character/{self.enemy_or_player}/{self.name}/Idle/{i}.png").convert_alpha()
+        print("init animations launched for", self.name)
+        for i in range(1,4):
+            img = image.load(f"assets/images/character/{self.enemy_or_player}/{self.name}/idle/{i}.png").convert_alpha()
             self.animation_idle.append(img)
         self.image = self.animation_idle[self.frame_index]
         self.rect = self.image.get_rect()
@@ -74,4 +76,4 @@ class Character:
         }
 
     def take_damage(self, damage: int):
-        self.health -= randint(1, damage)
+        self.health -= damage
