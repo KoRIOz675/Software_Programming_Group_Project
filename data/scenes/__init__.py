@@ -1,12 +1,12 @@
 from pygame import *
 
 from data.audio import Audio, AudioType
-from data.window_renderer import scale_image, render
+from data.window_renderer import render
+from data.config.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Scene:
     def __init__(self, IMAGE_PATH: str, AUDIO_FILE: str, AUDIO_VOLUME: float):
-        self.IMAGE_PATH = IMAGE_PATH
-        self.image = scale_image(image.load(self.IMAGE_PATH))
+        self.image = transform.scale(image.load(IMAGE_PATH), (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.position = (0, 0)
         self.music = Audio(AUDIO_FILE, AUDIO_VOLUME, AudioType.BGM)
 
