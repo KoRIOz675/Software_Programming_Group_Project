@@ -14,6 +14,7 @@ class GameLoop:
     def __init__(self):
         self.is_going = True
         self.current_scene = None
+        self.current_combat = None
 
     def set_scene(self, scene: Scene):
         self.current_scene = scene
@@ -21,6 +22,10 @@ class GameLoop:
     def get_scene(self):
         return self.current_scene
 
+    def get_combat(self):
+        return self.current_combat
+
     def start_game(self, save_path: str):
+        self.current_combat = level1
         self.current_scene = level1.get_scene()
         level1.start_combat()
