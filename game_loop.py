@@ -29,3 +29,7 @@ class GameLoop:
         self.current_combat = level1
         self.current_scene = level1.get_scene()
         level1.start_combat()
+
+    def loop(self, dt: float):
+        self.current_combat.draw()
+        self.current_combat.update(dt)
